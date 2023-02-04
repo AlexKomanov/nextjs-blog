@@ -14,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div >
-          Hello Next.JS
+          It is a Home page
       </div>
     </>
   )
