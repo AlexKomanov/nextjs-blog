@@ -18,7 +18,7 @@ interface IProps {
 const SimpleAccordion: FC<IProps> = ({items}) => {
 
   const elements = items.map((item, index) => (
-    <Accordion sx={{marginBottom: "10px"}}>
+    <Accordion sx={{marginBottom: "10px"}} key={index}>
     <AccordionSummary
       expandIcon={<ExpandMoreIcon />}
       aria-controls={`panel${index}-content`}
