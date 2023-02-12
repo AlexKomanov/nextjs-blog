@@ -1,19 +1,32 @@
 import SimpleAccordion, { ISimpleAccordionItem } from "@/src/components/general-ui-components/SimpleAccordion"
 import IPost from "@/src/types/IPost";
-import { useEffect, useState } from "react"
+import { getServerAbsoluteUrl } from "@/src/utils/server/serverUtils";
+import path from "path";
+import { FC } from "react"
 
-const Posts = () => {
 
-  const [posts, setPosts] = useState<IPost[]>([]);
-  
-  const getPosts = () => {
-    fetch('/api/posts')
-    .then((response) => response.json())
-    .then((data) => setPosts(data))
-    console.log(posts)
+export async function getStaticProps() {
+  // get posts
+  let posts : IPost[] = [];
+  const url = path.join(getServerAbsoluteUrl(), '/api/posts')
+  try {
+    const response = await fetch(url);
+    posts = await response.json();
+  } catch (error) {
+    console.error(error);
+    
   }
 
-  useEffect(getPosts, [])
+  return {
+    props: {posts},
+  }
+}
+
+interface IProps {
+  posts: IPost[];
+}
+
+const Posts : FC<IProps> = ({posts}) => {
   
   const allPosts: ISimpleAccordionItem[] = posts.map(post => {
     return {
