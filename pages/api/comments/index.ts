@@ -8,7 +8,7 @@ export default async function handler(
 ) {
     let shortComments: ICommentShort[] = comments.map((comment) => {
         const {id, description} = comment;
-        return { id, description}
-    })
+        return {id, description}
+    });
     res.status(200).json(shortComments)
 }
